@@ -18,71 +18,71 @@ import java.util.Collections;
 @RequestMapping("/v1/account")
 public class UserController {
 
-  @Autowired
-  private UserService userService;
+    @Autowired
+    private UserService userService;
 
-  @PostMapping("/users")
-  public ResponseEntity create(@RequestBody User user) {
-    //TODO: implement post with required permission
-    throw new NotImplementedException();
-  }
+    @PostMapping("/users")
+    public ResponseEntity create(@RequestBody User user) {
+        //TODO: implement post with required permission
+        throw new NotImplementedException();
+    }
 
-  @GetMapping("/users/{userId}")
-  public ResponseEntity read(@PathVariable String userId) {
-    //TODO: implement get with required permission
-    throw new NotImplementedException();
-  }
-
-
-  @PutMapping("/users/{id}")
-  public ResponseEntity<User> updateUser(@RequestBody User user, @PathParam("id") Integer id) {
-
-    //TODO: implement put with required permission
-    throw new NotImplementedException();
-
-  }
-
-  @PatchMapping("/users/{id}")
-  public ResponseEntity patch(@PathParam("id") Integer id, @RequestBody JsonNode patchJson) {
-    //TODO: implement patch with required permission
-    // Refer: http://jsonpatch.com/
-    // https://github.com/java-json-tools/json-patch
-    throw new NotImplementedException();
-
-  }
-
-  @DeleteMapping("/users/{userId}")
-  public ResponseEntity delete(@PathParam("id") Integer id) {
-    //TODO: implement delete with required permission
-    throw new NotImplementedException();
-  }
+    @GetMapping("/users/{userId}")
+    public ResponseEntity read(@PathVariable String userId) {
+        //TODO: implement get with required permission
+        throw new NotImplementedException();
+    }
 
 
-  @GetMapping(value = "/users")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
-  public ResponseEntity<UserCollection> search(@RequestParam String username) {
-    UserCollection userCollection = new UserCollection();
-    User user = userService.search(username);
-    userCollection.setItems(Collections.singletonList(user));
-    return new ResponseEntity<>(userCollection, HttpStatus.OK);
+    @PutMapping("/users/{id}")
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathParam("id") Integer id) {
 
-  }
+        //TODO: implement put with required permission
+        throw new NotImplementedException();
 
-  @PostMapping("/login")
-  public LoginResponse login(@RequestBody LoginRequest loginRequest) {
-    return userService.login(loginRequest);
-  }
+    }
 
-  @PostMapping("/register")
-  public RegistrationResponse register(@RequestBody User user) {
-    return userService.register(user);
+    @PatchMapping("/users/{id}")
+    public ResponseEntity patch(@PathParam("id") Integer id, @RequestBody JsonNode patchJson) {
+        //TODO: implement patch with required permission
+        // Refer: http://jsonpatch.com/
+        // https://github.com/java-json-tools/json-patch
+        throw new NotImplementedException();
 
-  }
+    }
 
-  @GetMapping("/refresh")
-  @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
-  public String refresh(HttpServletRequest req) {
-    return userService.refresh(req.getRemoteUser());
-  }
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity delete(@PathParam("id") Integer id) {
+        //TODO: implement delete with required permission
+        throw new NotImplementedException();
+    }
+
+
+    @GetMapping(value = "/users")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<UserCollection> search(@RequestParam String username) {
+        UserCollection userCollection = new UserCollection();
+        User user = userService.search(username);
+        userCollection.setItems(Collections.singletonList(user));
+        return new ResponseEntity<>(userCollection, HttpStatus.OK);
+
+    }
+
+    @PostMapping("/login")
+    public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+        return userService.login(loginRequest);
+    }
+
+    @PostMapping("/register")
+    public RegistrationResponse register(@RequestBody User user) {
+        return userService.register(user);
+
+    }
+
+    @GetMapping("/refresh")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+    public String refresh(HttpServletRequest req) {
+        return userService.refresh(req.getRemoteUser());
+    }
 
 }

@@ -8,6 +8,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class MarketingAccount {
+
     Integer id;
     Integer userId;
     String status;

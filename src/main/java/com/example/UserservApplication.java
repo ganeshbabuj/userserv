@@ -18,45 +18,45 @@ import java.util.Arrays;
 @SpringBootApplication
 public class UserservApplication implements CommandLineRunner {
 
-  @Autowired
-  UserService userService;
+    @Autowired
+    UserService userService;
 
-  public static void main(String[] args) {
-    SpringApplication.run(UserservApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(UserservApplication.class, args);
+    }
 
-  @Bean
-  public ModelMapper modelMapper() {
-    return new ModelMapper();
-  }
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
-  @Bean
-  public RestTemplate restTemplate(RestTemplateBuilder builder) {
-    return builder.build();
-  }
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
 
 
-  @Override
-  public void run(String... params) throws Exception {
-    User admin = new User();
-    admin.setFirstName("admin");
-    admin.setLastName("admin");
-    admin.setUsername("admin");
-    admin.setPassword("admin");
-    admin.setEmail("admin@example.com");
-    admin.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_ADMIN)));
+    @Override
+    public void run(String... params) throws Exception {
+        User admin = new User();
+        admin.setFirstName("admin");
+        admin.setLastName("admin");
+        admin.setUsername("admin");
+        admin.setPassword("admin");
+        admin.setEmail("admin@example.com");
+        admin.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_ADMIN)));
 
-    userService.register(admin);
+        userService.register(admin);
 
-    User user = new User();
-    user.setFirstName("user");
-    user.setLastName("user");
-    user.setUsername("user");
-    user.setPassword("user");
-    user.setEmail("user@example.com");
-    user.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_USER)));
+        User user = new User();
+        user.setFirstName("user");
+        user.setLastName("user");
+        user.setUsername("user");
+        user.setPassword("user");
+        user.setEmail("user@example.com");
+        user.setRoles(new ArrayList<Role>(Arrays.asList(Role.ROLE_USER)));
 
-    userService.register(user);
-  }
+        userService.register(user);
+    }
 
 }
