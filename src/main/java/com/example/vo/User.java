@@ -16,6 +16,7 @@ public class User {
   private String lastName;
   private String username;
   private String email;
+  private String mobile;
 
   @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;

@@ -8,10 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
+import java.security.Principal;
 import java.util.Collections;
 
 @RestController
@@ -24,43 +23,46 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity create(@RequestBody User user) {
         //TODO: implement post with required permission
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
-    @GetMapping("/users/{userId}")
-    public ResponseEntity read(@PathVariable String userId) {
+    @GetMapping("/users/{id}")
+    public ResponseEntity read(@PathVariable("id") Integer id) {
         //TODO: implement get with required permission
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathParam("id") Integer id) {
+    public ResponseEntity<User> updateUser(@PathVariable("id") Integer id, @RequestBody User user) {
 
         //TODO: implement put with required permission
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
 
     }
 
     @PatchMapping("/users/{id}")
-    public ResponseEntity patch(@PathParam("id") Integer id, @RequestBody JsonNode patchJson) {
+    public ResponseEntity patch(@PathVariable("id") Integer id, @RequestBody JsonNode patchJson) {
         //TODO: implement patch with required permission
         // Refer: http://jsonpatch.com/
         // https://github.com/java-json-tools/json-patch
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
 
     }
 
-    @DeleteMapping("/users/{userId}")
-    public ResponseEntity delete(@PathParam("id") Integer id) {
+    @DeleteMapping("/users/{id}")
+    public ResponseEntity delete(@PathVariable("id") Integer id) {
         //TODO: implement delete with required permission
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
 
     @GetMapping(value = "/users")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<UserCollection> search(@RequestParam String username) {
+    public ResponseEntity<UserCollection> search(@RequestParam String username, Principal principal) {
+
+        System.out.println("Search done by: " + principal.getName());
+        System.out.println("Looking for: " + username);
         UserCollection userCollection = new UserCollection();
         User user = userService.search(username);
         userCollection.setItems(Collections.singletonList(user));
